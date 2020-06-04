@@ -11,8 +11,6 @@ get_header();
 
 ?>
 
-HELLLOO!!!!
-
 <main id="site-content" role="main">
 
 <?php

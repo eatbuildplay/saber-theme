@@ -11,3 +11,12 @@ Author URI: https://eatbuildplay.com/
 Theme URI: https://eatbuildplay.com/themes/saber/
 License: GNU General Public License v3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
+*/
+
+body{
+  margin: 0;
+}
+.elementor .elementor-heading-title {
+  line-height: 1.5;
+  margin: 15px 0;
+}
