@@ -21,7 +21,6 @@ function saberRegisterMenu() {
 }
 add_action( 'init', 'saberRegisterMenu' );
 
-/*
 if( function_exists('acf_add_options_page') ) {
 
   acf_add_options_page(array(
@@ -45,32 +44,44 @@ if( function_exists('acf_add_options_page') ) {
 	));
 
 }
-*/
-
 
 add_action('wp_enqueue_scripts', 'saberScripts');
 function saberScripts() {
 
   wp_enqueue_script(
+    'particles-js',
+    get_template_directory_uri() . '/assets/particles/particles.js',
+    array(),
+    true
+  );
+
+  wp_enqueue_script(
     'saber-skeleton-plugin-js',
     get_template_directory_uri() . '/assets/avnSkeleton/avnPlugin.js',
-    array(),
+    array('jquery'),
     true
   );
 
   wp_enqueue_script(
     'saber-skeleton-js',
     get_template_directory_uri() . '/assets/avnSkeleton/avnSkeleton.js',
-    array(),
+    array('jquery'),
     true
   );
 
   wp_enqueue_script(
     'saber-js',
     get_template_directory_uri() . '/assets/saber.js',
-    array(),
+    array(
+      'jquery',
+      'saber-skeleton-js',
+      'particles-js'
+    ),
     true
   );
+
+
+  /* styles */
 
   wp_enqueue_style(
     'saber-skeleton-css',
@@ -78,6 +89,8 @@ function saberScripts() {
     array(),
     true
   );
+
+
 
   wp_enqueue_style(
     'saber-style',

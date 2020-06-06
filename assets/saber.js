@@ -1,4 +1,15 @@
-jQuery(document).ready(function($){
+jQuery(document).ready(function($) {
+
+  /*
+   * Particles
+   */
+  particlesJS.load('particle-hero', 'http://eatbuildplay.local/wp-content/themes/saber/assets/particles/demo/particles.json', function() {
+    console.log('callback - particles.js config loaded');
+  });
+
+  /*
+   * Skeleton
+   */
 
   var $wrapper = $('.wrapper'), step = 0;
 
