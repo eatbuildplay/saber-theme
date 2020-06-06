@@ -3,9 +3,13 @@ jQuery(document).ready(function($) {
   /*
    * Particles
    */
-  particlesJS.load('particle-hero', 'http://eatbuildplay.local/wp-content/themes/saber/assets/particles/demo/particles.json', function() {
-    console.log('callback - particles.js config loaded');
-  });
+  var $particleEl = $('#particle-hero .elementor-background-overlay');
+  if( $particleEl.length ) {
+    particlesJS.load(
+      '#particle-hero .elementor-background-overlay',
+      window.location.protocol + '//' + window.location.host + '/wp-content/themes/saber/assets/particles/demo/particles.json'
+    );
+  }
 
   /*
    * Skeleton
