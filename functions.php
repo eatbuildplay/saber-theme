@@ -100,3 +100,16 @@ function saberScripts() {
   );
 
 }
+
+
+/* Class Requires */
+require_once(SABER_THEME_PATH.'src/core/PostType.php');
+
+
+add_action('init', 'loadComponents', 0);
+function loadComponents() {
+
+  require_once(SABER_THEME_PATH.'src/components/query/QueryComponent.php');
+  new \SaberTheme\QueryComponent();
+
+}
