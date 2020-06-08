@@ -105,11 +105,18 @@ function saberScripts() {
 /* Class Requires */
 require_once(SABER_THEME_PATH.'src/core/PostType.php');
 
-
+/* Load Components */
 add_action('init', 'loadComponents', 0);
 function loadComponents() {
 
   require_once(SABER_THEME_PATH.'src/components/query/QueryComponent.php');
   new \SaberTheme\QueryComponent();
 
+}
+
+/* Load Elementor Widgets */
+add_action( 'elementor/widgets/widgets_registered', 'loadWidgets' );
+function loadWidgets() {
+  require_once( SABER_THEME_PATH . 'widgets/Repeater.php' );
+  \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \SaberTheme\RepeaterWidget() );
 }
