@@ -22,6 +22,25 @@ class RepeaterWidget extends \Elementor\Widget_Base {
 
   protected function _register_controls() {
 
+    $this->start_controls_section(
+			'style_section',
+			[
+				'label' => __( 'Style Section', 'plugin-name' ),
+				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+			]
+		);
+
+    $this->add_control(
+			'theme',
+			[
+				'label' => __( 'Theme', 'saber' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'input_type' => 'text'
+			]
+		);
+
+    $this->end_controls_section();
+
 		$this->start_controls_section(
 			'content_section',
 			[
@@ -103,6 +122,51 @@ class RepeaterWidget extends \Elementor\Widget_Base {
 			]
 		);
 
+    $this->add_control(
+			'meta_key',
+      [
+				'label' => __( 'Meta Key', 'saber' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'input_type' => 'text'
+			]
+		);
+
+    $repeater = new \Elementor\Repeater();
+
+    $repeater->add_control(
+			'meta_query_key', [
+				'label' => __( 'Key', 'saber-theme' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => __( '' , 'saber-theme' ),
+			]
+		);
+
+    $repeater->add_control(
+			'meta_query_value', [
+				'label' => __( 'Value', 'saber-theme' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => __( '' , 'saber-theme' ),
+			]
+		);
+
+    $repeater->add_control(
+			'meta_query_compare', [
+				'label' => __( 'Comparison', 'saber-theme' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => __( '=' , 'saber-theme' ),
+			]
+		);
+
+		$this->add_control(
+			'meta_query_list',
+			[
+				'label' => __( 'Meta Query', 'saber-theme' ),
+				'type' => \Elementor\Controls_Manager::REPEATER,
+				'fields' => $repeater->get_controls(),
+				'default' => [],
+				'title_field' => '{{{ meta_query_key }}}',
+			]
+		);
     $this->end_controls_section();
 
 	}
@@ -115,12 +179,14 @@ class RepeaterWidget extends \Elementor\Widget_Base {
     $limit    = $settings['limit'];
     $order    = $settings['order'];
     $orderBy  = $settings['order_by'];
+    $meta_key = $settings['meta_key'];
 
     $args = [
       'post_type'       => $postType,
       'posts_per_page'  => $limit,
       'order'           => $order,
-      'orderby'         => $orderBy
+      'orderby'         => $orderBy,
+      'meta_key'        => $meta_key
     ];
 		$posts = get_posts( $args );
 
@@ -133,14 +199,13 @@ class RepeaterWidget extends \Elementor\Widget_Base {
 
         $postQueried = query_posts(['include'=>[$postItem->ID]]);
 
-				print '<div class="post-list-item">';
 				$templatePost = get_post( $settings['item_template'] );
 
 				$post = $postItem;
         $GLOBALS['post'] = $postItem;
 				setup_postdata($post);
-				print \ElementorPro\Plugin::elementor()->frontend->get_builder_content_for_display( $templatePost->ID );
-				print '</div>';
+				$elementorContent = \ElementorPro\Plugin::elementor()->frontend->get_builder_content_for_display( $templatePost->ID );
+        print $elementorContent;
 
         wp_reset_query();
 
