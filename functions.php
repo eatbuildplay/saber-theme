@@ -70,7 +70,7 @@ function saberScripts() {
   );
 
   wp_enqueue_script(
-    'saber-js',
+    'saber-theme-js',
     get_template_directory_uri() . '/assets/saber.js',
     array(
       'jquery',
@@ -93,7 +93,7 @@ function saberScripts() {
 
 
   wp_enqueue_style(
-    'saber-style',
+    'saber-theme-style',
     get_template_directory_uri() . '/style.css',
     array(),
     true
