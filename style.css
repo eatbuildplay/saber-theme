@@ -118,8 +118,8 @@ h3 {
 
 /* WooCommerce */
 .woocommerce {
-  max-width: 960px;
-  margin: 40px auto 30px auto;
+  /* max-width: 960px; */
+  /* margin: 40px auto 30px auto;  */
 }
 
 .woocommerce #respond input#submit.alt, .woocommerce a.button.alt, .woocommerce button.button.alt, .woocommerce input.button.alt {
